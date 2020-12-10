@@ -24,7 +24,8 @@ image:
 ---
 ![Bounding box detection result of a example image.](wechatimg131.jpeg "Bounding box detection result of an image in the KITTI dataset.")
 
-Image 1: Bounding box detection result of an image in the KITTI dataset
+<p style="text-align: center;"><sub><sup>Image 1: Bounding box detection result of an image in the KITTI dataset</sup></sub></p>
+
 
 Our project consists of detecting the 2D bounding box locations of cars using 2D images. We aim to reproduce the results for object detection using the CenterNet framework, which uses keypoint estimation to determine the center point of the object, in the KITTI data set. Our results show that the model performs fairly well in detecting the locations of cars in the KITTI dataset, achieving similar performance as what is presented in the original CenterNet paper.
 
