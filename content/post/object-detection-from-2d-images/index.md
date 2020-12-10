@@ -87,6 +87,12 @@ Once the keypoint detection heatmap is generated, other properties, such as the 
 
 
 
+![](combined.jpg)
+
+<p style="text-align: center;"><sub><sup>Figure 1: An example image in the validation set. (left) Ground truth (right) inference results from our implementation.</sup></sub></p>
+
+
+
 ## Training and Testing
 
 
@@ -107,23 +113,23 @@ For the evaluation, we followed the standard average precision (AP) evaluation c
 
 ![](screenshot-from-2020-12-10-15-52-19.png)
 
-<p style="text-align: center;"><sub><sup>Compare evaluation results of our implementation to the original CenterNet on KITTI.</sup></sub></p>
+<p style="text-align: center;"><sub><sup>Table 1: Compare evaluation results of our implementation to the original CenterNet on KITTI.</sup></sub></p>
 
-Table above shows our evaluation results compared to the original CenterNet paper. It shows that our implementation is able to achieve similar performance as the original paper. Notice that the original paper follows a 50/50 training and validation split and we are having an 80/20 split. Also, the results of the original paper is based on all classes but we only focused on cars predictions in this project.
+Table 1 shows our evaluation results compared to the original CenterNet paper. It shows that our implementation is able to achieve similar performance as the original paper. Notice that the original paper follows a 50/50 training and validation split and we are having an 80/20 split. Also, the results of the original paper is based on all classes but we only focused on cars predictions in this project.
 
-![](combined.jpg)
 
-<p style="text-align: center;"><sub><sup>An example image in the validation set. (left) Ground truth (right) inference results from our implementation.</sup></sub></p>
 
 ![](heatmap_compare.jpg)
 
-<p style="text-align: center;"><sub><sup>(left) Ground truth (right) Predicted heatmap. (bottom) Inference results.</sup></sub></p>
+<p style="text-align: center;"><sub><sup>Figure 2: (left) Ground truth (right) Predicted heatmap. (bottom) Inference results.</sup></sub></p>
 
-Figure above shows an example inference result compared to the ground truth. It is shown that our model to able to predict most of the objects correctly in this scene. Figure above shows the comparison between the ground truth heatmap with Gaussian smoothing and our predicted heatmap on the same image.
+Figure 1 shows an example inference result compared to the ground truth. It is shown that our model to able to predict most of the objects correctly in this scene. Figure 2 shows the comparison between the ground truth heatmap with Gaussian smoothing and our predicted heatmap on the same image.
 
 ![](pr_curve.png)
 
-Figure above shows the precision-recall curve of our final model on the validation set. Three curves represent easy, moderate and hard objects respectively. The area under the curve is the average precision.
+<p style="text-align: center;"><sub><sup>Figure 3: Precision Recall curve on validation set.</sup></sub></p>
+
+Figure 3 shows the precision-recall curve of our final model on the validation set. Three curves represent easy, moderate and hard objects respectively. The area under the curve is the average precision.
 
 
 
@@ -132,3 +138,25 @@ Figure above shows the precision-recall curve of our final model on the validati
 
 
 One of the main advantages of the CenterNet architecture is that it can be very easily extended to other tasks, such as 3D detection, as well as human pose estimation, with minor effort. Once the heat map for center detection is obtained, more properties of the image can be learned simply by changing the regression head of the model. It would be very interesting to see how the model performs when detecting 3D location of cars without any explicit depth measurement like LiDAR. Due to the short time frame of this project, we are unable to get to the point of doing 3D detection, but it is certainly a intriguing direction to take further on.
+
+
+
+## Reference
+
+
+
+\[1] X. Zhou, D. Wang, and P. Krahenb ¨ uhl, “Objects as ¨ points,” in arXiv preprint arXiv:1904.07850, 2019, https: //arxiv.org/pdf/1904.07850.pdf. 
+
+\[2] F. Yu, D. Wang, E. Shelhamer, and T. Darrell, “Deep layer aggregation,” 2017. 
+
+\[3] R. Girshick, J. Donahue, T. Darrell, and J. Malik, “Rich feature hierarchies for accurate object detection and semantic segmentation,” in Proceedings of the IEEE conference on computer vision and pattern recognition, 2014, pp. 580–587, https://openaccess.thecvf.com/content cvpr 2014/html/ Girshick Rich Feature Hierarchies 2014 CVPR paper. html. 
+
+\[4] A. Newell, K. Yang, and J. Deng, “Stacked hourglass networks for human pose estimation,” in European conference on computer vision. Springer, 2016, pp. 483–499, https://arxiv.org/pdf/1603.06937.pdf. 
+
+\[5] X. Zhou, J. Zhuo, and P. Krahenbuhl, “Bottom-up object detection by grouping extreme and center points,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2019, pp. 850–859, http://openaccess.thecvf.com/content CVPR 2019/ html/Zhou Bottom-Up Object Detection by Grouping Extreme and Center Points CVPR 2019 paper.html. 
+
+\[6] T.-Y. Lin, P. Goyal, R. Girshick, K. He, and P. Dollar, “Focal loss for dense object detection,” ´ in Proceedings of the IEEE international conference on computer vision, 2017, pp. 2980–2988, http://openaccess.thecvf.com/content iccv 2017/html/ Lin Focal Loss for ICCV 2017 paper.html.
+
+\[7] A. Geiger, P. Lenz, and R. Urtasun, “Are we ready for autonomous driving? the kitti vision benchmark suite,” in 2012 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2012, pp. 3354–3361, http://www. cvlibs.net/publications/Geiger2012CVPR.pdf. 
+
+\[8] M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The pascal visual object classes (voc) challenge,” International journal of computer vision, vol. 88, no. 2, pp. 303–338, 2009.
