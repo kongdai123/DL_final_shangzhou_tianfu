@@ -4,7 +4,7 @@ subtitle: "Northwestern University, Fall 2020 CS 496 Deep Learning Final
   Project. Instructor: Prof. Bryan Pardo. Team Members: Tianfu Wang
   (tianfuwang2021@u.northwestern.edu), Shangzhou Ye
   (shangzhouye2020@u.northwestern.edu)"
-date: 2020-12-10T07:48:49.600Z
+date: 2020-12-10T08:25:26.591Z
 summary: Our project consists of detecting the 2D bounding box locations of cars
   using 2D images. We aim to reproduce the results for object detection using
   the CenterNet framework, which uses keypoint estimation to determine the
