@@ -7,6 +7,9 @@ subtitle: "Northwestern University, Fall 2020 CS 496 Deep Learning Final
 date: 2020-12-10T08:27:05.570Z
 draft: false
 featured: false
+authors:
+  - Tianfu Wang
+  - Shangzhou Ye
 image:
   filename: featured
   focal_point: Smart
