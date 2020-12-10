@@ -5,13 +5,7 @@ subtitle: "Northwestern University, Fall 2020 CS 496 Deep Learning Final
   (tianfuwang2021@u.northwestern.edu), Shangzhou Ye
   (shangzhouye2020@u.northwestern.edu)"
 date: 2020-12-10T07:58:57.325Z
-summary: Our project consists of detecting the 2D bounding box locations of cars
-  using 2D images. We aim to reproduce the results for object detection using
-  the CenterNet framework, which uses keypoint estimation to determine the
-  center point of the object, in the KITTI data set. Our results show that the
-  model performs fairly well in detecting the locations of cars in the KITTI
-  dataset, achieving similar performance as what is presented in the original
-  CenterNet paper.
+summary: ""
 draft: true
 featured: true
 authors:
