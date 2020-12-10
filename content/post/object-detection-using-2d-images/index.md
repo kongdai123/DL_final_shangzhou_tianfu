@@ -1,8 +1,8 @@
 ---
 title: Object Detection Using 2D Images
-subtitle: "Northwestern University: Fall 2020 CS 496 Deep Learning Final
-  Project: Tianfu Wang(tianfuwang2021@u.northwestern.edu), Shangzhou Ye
-  (shangzhouye2020@u.northwestern.edu)"
+subtitle: Northwestern University, Fall 2020 CS 496 Deep Learning Final Project,
+  Tianfu Wang (tianfuwang2021@u.northwestern.edu), Shangzhou Ye
+  (shangzhouye2020@u.northwestern.edu)
 date: 2020-12-10T07:19:40.747Z
 draft: false
 featured: false
