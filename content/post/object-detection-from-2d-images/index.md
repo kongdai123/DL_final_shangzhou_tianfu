@@ -24,17 +24,15 @@ image:
 
 <p style="text-align: center;"><sub><sup>Bounding box detection result of an image in the KITTI dataset</sup></sub></p>
 
+![](heatmap_predict_overlap.png)
 
+<p style="text-align: center;"><sub><sup>Predicted heatmap of object center points on an image from the validation set.</sup></sub></p>
 
 ## Abstract
 
 We implemented CenterNet \[1] from scratch for 2D object detection and tested on [KITTI dataset](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d). We aimed to reproduce the results as what is presented in the original [CenterNet](https://arxiv.org/pdf/1904.07850.pdf) paper. The model represents each object as a single point - the center point of the 2D bounding box. DLA-34 \[2] is used as our backbone for center point estimation, and other object properties including width and length of the bounding box are regressed from the center point. We achieved 92.10% AP for easy objects, 86.72% AP for moderate objects and 78.73% AP for hard objects respectively. The performance of our implementation is similar to the original CenterNet paper.
 
-
-
-Our code is on <https://github.com/shangzhouye/centernet-detection-kitti>. 
-
-Our paper is at this [link](https://drive.google.com/file/d/1UsQk9BLiQ60QheyG00QhtySjKP13MJG9/view?usp=sharing).
+Our paper is at this [link](https://drive.google.com/file/d/1X2eLGzWRkYKiVJedTTP_CDeV3Lp2jgI5/view?usp=sharing), and our code is on [](https://github.com/shangzhouye/centernet-detection-kitti)github [here](https://github.com/shangzhouye/centernet-detection-kitti). 
 
 
 
@@ -42,7 +40,7 @@ Our paper is at this [link](https://drive.google.com/file/d/1UsQk9BLiQ60QheyG00Q
 
 
 
-The goal of our final project is to train a model that accurately detects the 2D location of cars purely 2D images. We use the KITTI dataset to predict the object’s bounding box location in the image pixel space. We aim to reproduce the result from the CenterNet paper.
+The goal of our final project is to train a model that accurately detects the 2D location of cars from 2D images. We use the KITTI dataset to predict the object’s bounding box location in the image pixel space. We aim to reproduce the result from the CenterNet paper.
 
 
 
@@ -72,7 +70,7 @@ Before CenterNet, keypoint estimation already been used in the task of object de
 
 
 
-The CenterNet framework \[1] models the object as a single point, which is the center of the bounding box in the image. CenterNet first uses keypoint estimation to find center points. The image is fed into a fully-convolutional encoder-decoder network, and the output is a heatmap for each class with values between \[0,1]. Peaks in the heatmap correspond to object centers. In our project, we use a DLA-34 network \[2] as the backbone for our keypoint estimation system. For our training, the input is the KITTI data set image resized to 512 * 512 pixels. We then calculate the center position p of the car objects in the resized image space from the label data, and generate the ground truth heatmap by passing the center keypoint though a Gaussian smoothing kernel, where the intensity value of each pixel is:
+The CenterNet framework \[1] models the object as a single point, which is the center of the bounding box in the image. CenterNet first uses keypoint estimation to find center points. The image is fed into a fully-convolutional encoder-decoder network, and the output is a heatmap for each class with values between \[0,1]. Peaks in the heatmap correspond to object centers. In our project, we use a DLA-34 network \[2] as the backbone for our keypoint estimation system. For our training, the input is the KITTI data set image resized to 512 x 512 pixels. We then calculate the center position *p* of the car objects in the resized image space from the label data, and generate the ground truth heatmap by passing the center keypoint though a Gaussian smoothing kernel, where the intensity value of each pixel is:
 
 ![](screenshot-from-2020-12-10-16-00-55.png)
 
@@ -81,7 +79,7 @@ A pixel-wise maximum is taken should two Gaussians overlap. A penalty-reduced pi
 ![](screenshot-from-2020-12-10-16-01-49.png)
 
 
-N is the number of keypoints, and alpha, beta are hyper-parameters for the focal loss\[6].
+N is the number of keypoints, and alpha, beta are hyper-parameters for the focal loss \[6].
 
 Once the keypoint detection heatmap is generated, other properties, such as the bounding box of the object, are then regressed from the image features at the center location. The regression shares the same fully-convolutional backbone  with  the  keypoint  estimator with a separate regression head for each property. The loss function for the regression is the L2 loss between the predicted size of the bounding box and the ground truth size of the  bounding box.
 
@@ -99,7 +97,7 @@ Once the keypoint detection heatmap is generated, other properties, such as the 
 
 We use the KITTI \[7] Vision Benchmark Suite. The dataset is already labeled and has a size of 24 GB. The KITTI dataset is compiled for autonomous driving development. The images of the KITTI dataset consist of mainly outdoor roads scenes, with a lot of cars and other objects like pedestrians and houses. It consists of 7481 training images and 7518 test images, comprising a total of 80256 labeled objects. For this project, we focus on object detection for cars only. Because only those 7481 training images have publicly available labels, we random split them into training and validation sets. The training set is 80% of the whole dataset (5984 images) while the validation is 20% of the whole dataset (1497 images). No data augmentation is utilized for our project.
 
-The data consists of 2D RGB images and a corresponding txt file for the labels. In the label txt file, there are 16 values separated by spaces for each labeled object. The first value is the class in string format, the second value is the “truncated” value, a 0 or 1 value that refers to the object being on the edge of an image. The third value is the “occluded” value, a 0 or 1 value which refers to the object being occluded. The 4th value is the alpha, which is the observation angle of the object, ranging from -pi to pi. The 5th to 8th value is the 2D bounding box. The next 9th to 11th values are the dimensions height, width and length in meters. The next 12th to 14th values are the x,y,z location in meters. The 15th value is the rotation value, the angle of the object with respect to the camera in \[-pi, pi]. Finally, the 16th value is the score, only for predictions, ranging from 0 to 1. We output our prediction in the same format as the labels for evaluation.
+The data consists of 2D RGB images and a corresponding *txt* file for the labels. In the label *txt* file, there are 16 values separated by spaces for each labeled object. The first value is the class in string format, the second value is the “truncated” value, a 0 or 1 value that refers to the object being on the edge of an image. The third value is the “occluded” value, a 0 or 1 value which refers to the object being occluded. The 4th value is the alpha, which is the observation angle of the object, ranging from -pi to pi. The 5th to 8th value is the 2D bounding box. The next 9th to 11th values are the 3D dimensions height, width and length in meters. The next 12th to 14th values are the 3D x, y, z location in meters. The 15th value is the rotation value, the angle of the object with respect to the camera in \[-pi, pi]. Finally, the 16th value is the score, only for predictions, ranging from 0 to 1. We output our prediction in the same format as the labels for evaluation.
 
 For the evaluation, we followed the standard average precision (AP) evaluation criteria proposed in the Pascal VOC benchmark \[8]. A car detection can be counted as true positive only if its overlap with the ground truth bounding box is above 70%. By adjusting the confidence threshold for detection, a precision-recall (PR) curve can be obtained with 40 different recall positions. The AP can then be calculated as the area under the PR curve. We use this calculated average precision value as the measure of the performance of our system. The KITTI benchmark evaluation criterion has three levels of difficulty: Easy, Medium, and Hard  \[7]. The object's minimum bounding box height decreases with increasing difficulty, while the maximum occlusion level and maximum truncation increases with increasing difficulty.
 
@@ -109,7 +107,7 @@ For the evaluation, we followed the standard average precision (AP) evaluation c
 
 
 
-**Implementation details:** We use 34-layer deep layer aggregation (DLA) network \[3] as our backbone. The heatmap from keypoint estimator has the size of 128 * 128 with an output stride of 4. There is an additional local offset prediction to compensate the decrease in resolution. The weight of heatmap loss, width/height loss and offset loss are 1, 0.1 and 0.1 respectively. We trained with batch-size of 8 (on 1 GPU) and learning rate of 5e-4. The models converges after 3 epochs and start to over-fitting after that.
+**Implementation details:** We use 34-layer deep layer aggregation (DLA) network \[2] as our backbone. The heatmap from keypoint estimator has the size of 128 x 128 with an output stride of 4. There is an additional local offset prediction to compensate the decrease in resolution. The weights of heatmap loss, width/height loss and offset loss are 1, 0.1 and 0.1 respectively. We trained with batch-size of 8 (on 1 GPU) and learning rate of 5e-4. The models converges after 3 epochs and start to over-fitting after that.
 
 ![](screenshot-from-2020-12-10-15-52-19.png)
 
@@ -125,11 +123,17 @@ Table 1 shows our evaluation results compared to the original CenterNet paper. I
 
 Figure 1 shows an example inference result compared to the ground truth. It is shown that our model to able to predict most of the objects correctly in this scene. Figure 2 shows the comparison between the ground truth heatmap with Gaussian smoothing and our predicted heatmap on the same image.
 
+![](loss_plot.png)
+
+<p style="text-align: center;"><sub><sup>Figure 3: Training and Validation loss for the first epoch.</sup></sub></p>
+
+Figure 3 shows the training and validation loss for the first epoch. It contains 745 batches, where each batch includes 8 images. The training loss is averaged every 5 batches and the validation loss is calculated every 20 batches on 10% of the entire validation set.
+
 ![](pr_curve.png)
 
-<p style="text-align: center;"><sub><sup>Figure 3: Precision Recall curve on validation set.</sup></sub></p>
+<p style="text-align: center;"><sub><sup>Figure 4: Precision Recall curve on validation set.</sup></sub></p>
 
-Figure 3 shows the precision-recall curve of our final model on the validation set. Three curves represent easy, moderate and hard objects respectively. The area under the curve is the average precision.
+Figure 4 shows the precision-recall curve of our final model on the validation set. Three curves represent easy, moderate and hard objects respectively. The area under the curve is the average precision (AP).
 
 
 
